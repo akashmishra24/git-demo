@@ -2,8 +2,15 @@
 trigger:
 - master
 
+# strategy is to create multiple agents
+strategy:
+  matrix:
+    linux:
+      operatingSystem: 'ubuntu-latest'
+    windows:
+      operatingSystem: 'windows-2019'
 pool:
-  vmImage: ubuntu-latest
+  vmImage: $(operatingSystem)
 stages:
 - stage: Build
   jobs:
