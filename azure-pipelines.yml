@@ -11,11 +11,13 @@ stages:
     steps:
     - script: echo "Stage-Build and Job-Job1"
     - bash: echo $(variable1)
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
 - stage: Dev
   dependsOn: Build
   jobs:
