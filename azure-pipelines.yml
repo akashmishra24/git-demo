@@ -24,6 +24,11 @@ stages:
   - job: Job2
     steps:
     - script: echo "Stage-Dev and Job-Job2"
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'test-artiact'
+        publishLocation: 'Container'
 
 
 #- stage: Prod
