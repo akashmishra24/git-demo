@@ -3,15 +3,15 @@ trigger:
 - master
 
 # strategy is to create multiple agents
-strategy:
-  matrix:
-    linux:
-      operatingSystem: 'ubuntu-latest'
-    windows:
-      operatingSystem: 'windows-2019'
+# strategy:
+#   matrix:
+#     linux:
+#       operatingSystem: 'ubuntu-latest'
+#     windows:
+#       operatingSystem: 'windows-2019'
 pool:
   vmImage: $(operatingSystem)
-  
+
 stages:
 - stage: Build
   jobs:
@@ -26,6 +26,7 @@ stages:
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - bash: ls -R $(Build.ArtifactStagingDirectory)
+    
 - stage: Dev
   dependsOn: Build
   jobs:
@@ -37,7 +38,13 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'test-artiact'
         publishLocation: 'Container'
-
+  - deployment: DeveployJob
+    environment: Dev
+    strategy:
+     runOnce:
+       deploy:
+         steps:
+         - script: echo Deploy to Dev
 
 #- stage: Prod
 #  jobs:
