@@ -19,9 +19,9 @@ stages:
     steps:
     - script: echo "Stage-Dev and Job-Job2"
 
-- stage: Prod
-  jobs:
-  - job: Job3
-    steps:
-    - script: echo "Stage-Prod and Job-Job3"
+#- stage: Prod
+#  jobs:
+#  - job: Job3
+#    steps:
+#    - script: echo "Stage-Prod and Job-Job3"
 
