@@ -10,8 +10,10 @@ stages:
   - job: Job1
     steps:
     - script: echo "Stage-Build and Job-Job1"
+    - bash: echo $(variable1)
 
 - stage: Dev
+  dependsOn: Build
   jobs:
   - job: Job2
     steps:
